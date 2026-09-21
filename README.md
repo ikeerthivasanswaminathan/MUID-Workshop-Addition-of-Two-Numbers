@@ -1,42 +1,147 @@
-# Exp - 1 ATM & BANKING SYSTEM
+# MUID - Workshop - Addition of Two Numbers
 
-# AIM : To study the problem statement, SRS document and draw all the UML diagrams of ATM System.
+Program to add two numbers in Android Studio Application 
 
-# SRS (Procedure) :
+Developed by: KEERTHIVASAN S
 
-1. Step 1 - Open StarUML and start a new project.
-2. Step 2 - Name the project based on the system (e.g., ATM, Library).
-3. Step 3 - Identify actors and use cases from the system requirements.
-4. Step 4 - Choose and draw diagrams (Use Case, Class, Sequence, etc.).
-5. Step 5 - Add elements using the toolbox and connect them properly.
-6. Step 6 - Label all components clearly and meaningfully.
-7. Step 7 - Save and export diagrams as images or PDF.
+Register Number: 212223220046
 
-# DIAGRAMS:
+# PROGRAM
 
-### DIAGRAM 1 - USE CASE
+## MAINACTIVITY.java
 
-![usecase](https://github.com/user-attachments/assets/f941c5bc-4f50-4221-8635-76269092598e)
+```
+package com.example.addnum;
 
-### DIAGRAM 2 - CLASS
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-![class](https://github.com/user-attachments/assets/c40e3fcf-b74c-4515-8f3e-4ad066037070)
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
-### DIAGRAM 3 - ACTIVITY
+public class MainActivity extends AppCompatActivity {
 
-![activity](https://github.com/user-attachments/assets/957cdf40-9e28-4ddd-9119-568761ce8842)
+    private EditText etNum1, etNum2;
+    private Button btnAdd;
+    private TextView tvResult;
 
-### DIAGRAM 4 - SEQUENCE
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
-![sequence](https://github.com/user-attachments/assets/c5d14dc4-dcbd-4979-b632-455d195f74ce)
+        etNum1 = findViewById(R.id.etNum1);
+        etNum2 = findViewById(R.id.etNum2);
+        btnAdd = findViewById(R.id.btnAdd);
+        tvResult = findViewById(R.id.tvResult);
 
-### DIAGRAM 5 - PACKAGE
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculateSum();
+            }
+        });
+    }
 
-![package](https://github.com/user-attachments/assets/25773fe6-32e8-4571-8af0-44201052190d)
+    private void calculateSum() {
+        String str1 = etNum1.getText().toString().trim();
+        String str2 = etNum2.getText().toString().trim();
 
-### DIAGRAM 6 - COMMUNICATION
+        if (str1.isEmpty() || str2.isEmpty()) {
+            Toast.makeText(this, "Please enter both numbers", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-![communication](https://github.com/user-attachments/assets/4c445dbb-8d0a-4503-8802-7f75c0a8e754)
+        try {
+            double num1 = Double.parseDouble(str1);
+            double num2 = Double.parseDouble(str2);
+            double sum = num1 + num2;
 
-# RESULT:
-Thus, the ATM & Banking System was created successfully.
+            tvResult.setText("Result: " + sum);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Invalid input", Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+```
+
+## Activity_Main.xml
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/etNum1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter first number"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etNum2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Enter second number"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="Add" />
+
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Result: "
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+## OUTPUT
+
+<img width="1917" height="1023" alt="wpop1" src="https://github.com/user-attachments/assets/a44219ef-29d1-4035-8119-d78a1335571a" />
+
+<img width="1916" height="1017" alt="wpop2" src="https://github.com/user-attachments/assets/6991a9d7-d469-490a-90d3-88e1b5d2afd9" />
+
+## RESULT
+
+The Android application was successfully developed to add two numbers and display the sum.
